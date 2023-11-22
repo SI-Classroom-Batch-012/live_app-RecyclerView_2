@@ -18,13 +18,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Dataset laden und testweise ausgeben
-        val dataset : List<Team> = Datasource().loadTeams()
+        val dataset : MutableList<Team> = Datasource().loadTeams()
         Log.d("DatasetLog", "$dataset")
 
         //Adapter erstellen und zuweisen
-        val adapter = TeamAdapter(dataset)
+        val adapter : TeamAdapter = TeamAdapter(dataset)
         binding.teamRV.adapter = adapter
 
+
+
+        binding.addFAB.setOnClickListener {
+            //Testweise ein neues Team hinzufügen
+            val myTeam : Team = Team("Test Team", 5)
+            adapter.addTeam(myTeam)
+        }
 
     }
 }

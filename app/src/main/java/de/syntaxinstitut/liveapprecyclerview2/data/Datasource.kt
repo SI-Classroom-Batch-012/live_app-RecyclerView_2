@@ -2,7 +2,7 @@ package de.syntaxinstitut.liveapprecyclerview2.data
 
 class Datasource {
 
-    fun loadTeams() : List<Team> {
+    fun loadTeams() : MutableList<Team> {
 
         val result = mutableListOf<Team>()
 
