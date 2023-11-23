@@ -48,6 +48,8 @@ class TeamAdapter(
             //holder.binding.scoreTV.text = team.score.toString()
 
             notifyItemChanged(holder.adapterPosition)
+
+            sortTeams()
         }
 
         holder.binding.imageButton.setOnClickListener {
@@ -62,6 +64,18 @@ class TeamAdapter(
 
         }
 
+
+    }
+
+    fun sortTeams() {
+
+        //Sortiere dataset
+        dataset.sortByDescending {team ->
+            team.score
+        }
+
+        //Aktualisiere Views
+        notifyDataSetChanged()
 
     }
 
