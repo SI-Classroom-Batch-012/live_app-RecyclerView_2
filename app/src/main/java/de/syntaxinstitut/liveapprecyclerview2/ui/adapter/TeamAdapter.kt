@@ -11,17 +11,24 @@ import de.syntaxinstitut.liveapprecyclerview2.databinding.ListItemBinding
 import de.syntaxinstitut.liveapprecyclerview2.ui.ListFragmentDirections
 
 class TeamAdapter(
-    val dataset: List<Team>,
+    private var dataset: List<Team>,
 ) : RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
 
     inner class TeamViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
-//    fun addTeam(newTeam: Team) {
-//        dataset.add(0, newTeam)
-//        notifyItemInserted(0)
-//        //notifyDataSetChanged()
-//    }
+    fun newData(data: List<Team>)
+    {
+        dataset = data
+        notifyDataSetChanged()
+    }
+
+
+    fun addTeam(newTeam: Team) {
+        dataset = listOf(newTeam) + dataset
+        notifyItemInserted(0)
+        //notifyDataSetChanged()
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
@@ -41,7 +48,8 @@ class TeamAdapter(
         holder.binding.scoreTV.text = team.score.toString()
 
         holder.binding.teamCV.setOnClickListener {
-            val navcontroller = holder.binding.root.findNavController()
+
+            val navcontroller = holder.itemView.findNavController()
             navcontroller.navigate(ListFragmentDirections.actionListFragmentToDetailFragment(position))
         }
 

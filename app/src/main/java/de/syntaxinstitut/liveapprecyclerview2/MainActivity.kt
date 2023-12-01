@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     var dataset: List<Team> = emptyList()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -24,55 +26,14 @@ class MainActivity : AppCompatActivity() {
 
         dataset = Datasource().loadTeams()
 
-//        //Dataset laden und testweise ausgeben
-//        val dataset : MutableList<Team> = Datasource().loadTeams()
-//        Log.d("DatasetLog", "$dataset")
-//
-//        //Adapter erstellen und zuweisen
-//        adapter = TeamAdapter(dataset)
-//        binding.teamRV.adapter = adapter
-//
-//
-//        binding.addFAB.setOnClickListener {
-//
-//            addTeamDialog()
-//
-//        }
 
     }
 
-    //Diese Funktion soll den Dialog erstellen der die Eingabe eines Namens ermöglicht
-    //Und dann ein neues Team mit diesem Namen erstellt
-//    fun addTeamDialog() {
-//
-//        val dialogBuilder = AlertDialog.Builder(this)
-//
-//        //Layout bestimmen
-//        dialogBuilder.setTitle("Team hinzufügen")
-//        val nameET = EditText(this)
-//        dialogBuilder.setView(nameET)
-//
-//        //Aktionen bestimmen
-//        dialogBuilder.setPositiveButton("Hinzufügen") { dialogInterface, number ->
-//
-//            //Ein neues Team hinzufügen
-//            val name = nameET.text.toString()
-//            val myTeam : Team = Team(name, 0)
-//            adapter.addTeam(myTeam)
-//
-//
-//            //Scroll an den Anfang
-//            binding.teamRV.scrollToPosition(0)
-////        val lastPosition = adapter.itemCount - 1
-//
-//            adapter.sortTeams()
-//        }
-//
-//        dialogBuilder.setNegativeButton("Abbrechen") { dialogInterface, _ ->
-//            dialogInterface.cancel()
-//        }
-//
-//        dialogBuilder.show()
-//    }
+    //region Daten-Management
 
+    fun addTeam(newTeam: Team){
+        dataset = listOf(newTeam) + dataset
+    }
+
+    //endregion
 }
